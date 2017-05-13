@@ -87,3 +87,16 @@ def update_jemima(cursor):
                       FROM applicants
                       WHERE first_name='Jemima' AND last_name='Foreman';""")
     return cursor.fetchall()
+
+
+def delete_arsenio(cursor):
+    '''
+    Arsenio, an applicant called us, that he and his friend applied to Codecool.
+    They both want to cancel the process, because they got an investor for the site they run: mauriseu.net
+
+    Write DELETE query to remove all the applicants, who applied with emails for this domain
+    (e-mail address has this domain after the @ sign).
+    '''
+    cursor.execute("""DELETE FROM applicants
+                      WHERE email LIKE '%@mauriseu.net';""")
+    print("Rows containing @mauriseu.net in email were deleted.")
