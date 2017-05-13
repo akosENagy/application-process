@@ -24,7 +24,7 @@ def get_miskolc_nicknames(cursor):
     '''
     Write a query that returns the nick_name-s of all mentors working at Miskolc.
     '''
-    column = 'nick_name'
+    column = ('nick_name',)
     cursor.execute("""SELECT nick_name FROM mentors WHERE city='Miskolc';""")
     result = cursor.fetchall()
     result.insert(0, column)
@@ -121,5 +121,5 @@ def delete_arsenio(cursor):
     '''
     cursor.execute("""DELETE FROM applicants
                       WHERE email LIKE '%@mauriseu.net';""")
-    print("Rows containing @mauriseu.net in email were deleted.")
+    print("\nRows containing @mauriseu.net in email were deleted.")
     return []
