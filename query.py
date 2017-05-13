@@ -1,13 +1,11 @@
-# IMPORTS
-####################################################################
-import psycopg2
-
-
 # QUERY FUNCTIONS
+#
 ####################################################################
 # INPUT: PSYCOPG2 CONNECTION CURSOR                                #
 # OUTPUT: QUERY RESULTS AS LIST OF TUPLES. TUPLE = ROW             #
 ####################################################################
+
+
 def get_mentor_names(cursor):
     '''
     Write a query that returns the 2 name columns of the mentors table.
