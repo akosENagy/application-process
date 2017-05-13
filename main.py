@@ -2,7 +2,12 @@ import psycopg2
 
 
 def get_mentor_names(cursor):
-    cursor.execute("SELECT first_name, last_name FROM mentors")
+    cursor.execute("""SELECT first_name, last_name FROM mentors;""")
+    return cursor.fetchall()
+
+
+def get_miskolc_nicknames(cursor):
+    cursor.execute("""SELECT nick_name FROM mentors WHERE city='Miskolc';""")
     return cursor.fetchall()
 
 
