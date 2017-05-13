@@ -1,5 +1,10 @@
+# IMPORTS
+####################################################################
 import query
 
+
+# CONSTANTS
+####################################################################
 MENU_OPTIONS = {
     0: query.get_mentor_names,
     1: query.get_miskolc_nicknames,
@@ -17,6 +22,7 @@ def display_menu():
     (Note: Does not call the function.)
     '''
     print('\nPlease choose one of the following options:\n')
+    print('(0) - Exit application')
     print('(1) - Names of the mentors')
     print('(2) - Nicknames of Miskolc mentors')
     print('(3) - Find Carol\'s phone number')
@@ -24,7 +30,6 @@ def display_menu():
     print('(5) - Insert Markus Schaffarzyk')
     print('(6) - Update Jemima Foreman\'s email')
     print('(7) - Delete @mauriseu.net emails')
-    print('\n')
 
 
 def get_choice():
@@ -32,8 +37,11 @@ def get_choice():
     while choice not in range(7):
         try:
             choice = int(input('Please enter your choice: ')) - 1
+
+            if choice == -1:
+                return 'Exit'
         except ValueError:
-            print('Invalid input.')
+            print('Please enter a valid number.')
 
     return MENU_OPTIONS[choice]
 
