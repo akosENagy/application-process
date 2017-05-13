@@ -16,11 +16,9 @@ MENU_OPTIONS = {
 }
 
 
+# FUNCTIONS
+####################################################################
 def display_menu():
-    '''
-    Displays menu and returns the function of choice from MENU_OPTIONS
-    (Note: Does not call the function.)
-    '''
     print('\nPlease choose one of the following options:\n')
     print('(0) - Exit application')
     print('(1) - Names of the mentors')
@@ -33,6 +31,11 @@ def display_menu():
 
 
 def get_choice():
+    '''
+    Asks for user input (number between 0-7)
+    and returns the corresponding function of choice from MENU_OPTIONS
+    (Note: Does not call the function.)
+    '''
     choice = ''
     while choice not in range(7):
         try:
@@ -46,3 +49,27 @@ def get_choice():
     return MENU_OPTIONS[choice]
 
 
+def print_result(result_list):
+    '''
+    Gets a list of tuples as input, prints them in a table.
+    '''
+    print()
+    if len(result_list) == 0:
+        print("No results to display.")
+        return None
+
+    max_column_lengths = []
+    for i, item in enumerate(result_list[0]):
+        lengths_in_column = [len(str(result_list[j][i])) for j in range(len(result_list))]
+
+        max_column_lengths.append(max(lengths_in_column))
+
+        # Print header
+        print(str(item) + ' ' * (max_column_lengths[i] - len(item)) + '|', end='')
+    print("\n" + "=" * (sum(max_column_lengths) + len(max_column_lengths)))
+
+    # Print the rest of the table
+    for row in result_list[1:]:
+        for i, item in enumerate(row):
+            print(str(item) + ' ' * (max_column_lengths[i] - len(str(item))) + '|', end='')
+        print()
