@@ -4,7 +4,6 @@
 # IMPORTS
 ####################################################################
 import psycopg2
-import query
 import display
 
 
