@@ -44,6 +44,20 @@ def get_carol(cursor):
     return cursor.fetchall()
 
 
+def get_not_carol(cursor):
+    '''
+    We called Carol, and she said it's not her hat. It belongs to another girl,
+    who went to the famous Adipiscingenimmi University.
+    You should write a query to get the same informations like with Carol, but for this other girl.
+    The only thing we know about her is her school e-mail address ending: '@adipiscingenimmi.edu'.
+    columns: full_name, phone_number
+    '''
+    cursor.execute("""SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
+                   FROM applicants
+                   WHERE email LIKE '%@adipiscingenimmi.edu';""")
+    return cursor.fetchall()
+
+
 # MAIN
 ####################################################################
 def main():
