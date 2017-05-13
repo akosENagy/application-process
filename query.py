@@ -66,7 +66,24 @@ def insert_marcus(cursor):
     '''
     cursor.execute("""INSERT INTO applicants
                       (first_name, last_name, phone_number, email, application_code)
-                      VALUES ('Markus', 'Schaffarzyk', 003620/725-2666, 'djnovus@groovecoverage.com', 54823);""")
+                      VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);""")
 
     cursor.execute("""SELECT * FROM applicants WHERE application_code=54823;""")
+    return cursor.fetchall()
+
+
+def update_jemima(cursor):
+    '''
+    Jemima Foreman, an applicant called us, that her phone number changed to: 003670/223-7459
+    Write an UPDATE query, that changes this data in the database for this applicant.
+    Also, write a SELECT query, that checks the phone_number column of this applicant.
+    Use both of her name parts in the conditions!
+    '''
+    cursor.execute("""UPDATE applicants
+                      SET phone_number='003670/223-7459'
+                      WHERE first_name='Jemima' AND last_name='Foreman';""")
+
+    cursor.execute("""SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
+                      FROM applicants
+                      WHERE first_name='Jemima' AND last_name='Foreman';""")
     return cursor.fetchall()
