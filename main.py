@@ -1,6 +1,11 @@
 import psycopg2
 
 
+def get_mentor_names(cursor):
+    cursor.execute("SELECT first_name, last_name FROM mentors")
+    return cursor.fetchall()
+
+
 def main():
     try:
         # setup connection string
