@@ -1,3 +1,5 @@
+# IMPORTS
+####################################################################
 import psycopg2
 
 
@@ -9,19 +11,25 @@ import psycopg2
 def get_mentor_names(cursor):
     '''
     Write a query that returns the 2 name columns of the mentors table.
-    columns: first_name, last_name
     '''
+    columns = ('first_name', 'last_name')
     cursor.execute("""SELECT first_name, last_name FROM mentors;""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, columns)
+
+    return result
 
 
 def get_miskolc_nicknames(cursor):
     '''
     Write a query that returns the nick_name-s of all mentors working at Miskolc.
-    column: nick_name
     '''
+    column = 'nick_name'
     cursor.execute("""SELECT nick_name FROM mentors WHERE city='Miskolc';""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, column)
+
+    return result
 
 
 def get_carol(cursor):
@@ -31,12 +39,15 @@ def get_carol(cursor):
     To look professional, we also need her full name when she answers the phone (for her full_name,
     you want to include a concatenation into your query, to get her full_name, like: "Carol Something"
     instead of having her name in 2 different columns in the result. This columns should be called: full_name).
-    columns: full_name, phone_number
     '''
+    columns = ('full_name', 'phone_number')
     cursor.execute("""SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
                    FROM applicants
                    WHERE first_name ='Carol';""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, columns)
+
+    return result
 
 
 def get_not_carol(cursor):
@@ -45,12 +56,15 @@ def get_not_carol(cursor):
     who went to the famous Adipiscingenimmi University.
     You should write a query to get the same informations like with Carol, but for this other girl.
     The only thing we know about her is her school e-mail address ending: '@adipiscingenimmi.edu'.
-    columns: full_name, phone_number
     '''
+    columns = ('full_name', 'phone_number')
     cursor.execute("""SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
                    FROM applicants
                    WHERE email LIKE '%@adipiscingenimmi.edu';""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, columns)
+
+    return result
 
 
 def insert_marcus(cursor):
@@ -64,12 +78,16 @@ def insert_marcus(cursor):
     After INSERTing the data, write a SELECT query, that returns with
     all the columns of this applicant! (use the unique application code for your condition!)
     '''
+    columns = ('id', 'first_name', 'last_name', 'phone_numger', 'email', 'application_code')
     cursor.execute("""INSERT INTO applicants
                       (first_name, last_name, phone_number, email, application_code)
                       VALUES ('Markus', 'Schaffarzyk', '003620/725-2666', 'djnovus@groovecoverage.com', 54823);""")
 
     cursor.execute("""SELECT * FROM applicants WHERE application_code=54823;""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, columns)
+
+    return result
 
 
 def update_jemima(cursor):
@@ -79,6 +97,7 @@ def update_jemima(cursor):
     Also, write a SELECT query, that checks the phone_number column of this applicant.
     Use both of her name parts in the conditions!
     '''
+    columns = ("full_name", 'phone_number')
     cursor.execute("""UPDATE applicants
                       SET phone_number='003670/223-7459'
                       WHERE first_name='Jemima' AND last_name='Foreman';""")
@@ -86,7 +105,10 @@ def update_jemima(cursor):
     cursor.execute("""SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number
                       FROM applicants
                       WHERE first_name='Jemima' AND last_name='Foreman';""")
-    return cursor.fetchall()
+    result = cursor.fetchall()
+    result.insert(0, columns)
+
+    return result
 
 
 def delete_arsenio(cursor):
@@ -100,3 +122,4 @@ def delete_arsenio(cursor):
     cursor.execute("""DELETE FROM applicants
                       WHERE email LIKE '%@mauriseu.net';""")
     print("Rows containing @mauriseu.net in email were deleted.")
+    return []
