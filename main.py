@@ -47,6 +47,12 @@ def get_applicants():
     return render_template('result.html', results=applicants)
 
 
+@app.route('/applicants-and-mentors')
+def get_applicants_and_mentors():
+    applicants_and_mentors = query.get_applicants_and_mentors()
+    return render_template('result.html', results=applicants_and_mentors)
+
+
 # MAIN
 ####################################################################
 def main():
