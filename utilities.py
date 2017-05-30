@@ -15,3 +15,12 @@ def init_db_connection(connection_string=CONNECTION_STRING):
     cursor = conn.cursor()
 
     return cursor
+
+
+def run_select_query(query_string):
+    '''
+    Receives a query string for a select statement, returns results as a list of tuples.
+    '''
+    cursor = init_db_connection()
+    cursor.execute(query_string)
+    return cursor.fetchall()
