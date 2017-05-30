@@ -29,6 +29,12 @@ def get_all_school():
     return render_template('result.html', results=results)
 
 
+@app.route('/mentors-by-country')
+def get_mentors_by_country():
+    results = query.get_mentors_by_country()
+    return render_template('result.html', results=results)
+
+
 # MAIN
 ####################################################################
 def main():

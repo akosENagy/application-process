@@ -37,6 +37,23 @@ def get_all_school():
     return results
 
 
+def get_mentors_by_country():
+    '''
+    On this page you should show the result of a query that returns the number
+    of the mentors per country ordered by the name of the countries
+    columns: country, count
+    '''
+    results = utilities.run_select_query(
+        '''
+        SELECT schools.country, COUNT(mentors.id) FROM mentors
+        JOIN schools ON (mentors.city=schools.city)
+        GROUP BY schools.country ORDER BY schools.country ASC;
+        ''', ["Country", "Count"]
+    )
+
+    return results
+
+
 ####################################################################
 # OLD QUERY FUNCTIONS
 ####################################################################
