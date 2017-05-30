@@ -12,16 +12,28 @@ def get_mentors():
     plus the name and country of the school (joining with the schools table) ordered by the
     mentors id column (columns: mentors.first_name, mentors.last_name, schools.name, schools.country).
     '''
-    cursor = utilities.init_db_connection()
-    cursor.execute('''
-                   SELECT mentors.first_name, mentors.last_name, schools.name, schools.country FROM mentors
-                   JOIN schools ON (mentors.city=schools.city) ORDER BY mentors.id;
-                   ''')
-    results = cursor.fetchall()
+    results = utilities.run_select_query(
+        '''
+        SELECT mentors.first_name, mentors.last_name, schools.name, schools.country FROM mentors
+        JOIN schools ON (mentors.city=schools.city) ORDER BY mentors.id;
+        ''', ['First Name', 'Last Name', 'School', 'Country']
+    )
+    return results
 
-    column_names = ['First Name', 'Last Name', 'School', 'Country']
-    results.insert(0, column_names)
 
+def get_all_school():
+    '''
+    On this page you should show the result of a query that returns the name of the mentors plus
+    the name and country of the school (joining with the schools table) ordered by the mentors id column.
+    BUT include all the schools, even if there's no mentor yet!
+    columns: mentors.first_name, mentors.last_name, schools.name, schools.country
+    '''
+    results = utilities.run_select_query(
+        '''
+        SELECT mentors.first_name, mentors.last_name, schools.name, schools.country FROM mentors
+        RIGHT JOIN schools ON (mentors.city=schools.city) ORDER BY mentors.id;
+        ''', ['First Name', 'Last Name', 'School', 'Country']
+    )
     return results
 
 

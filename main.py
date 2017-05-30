@@ -23,6 +23,12 @@ def get_mentors():
     return render_template('result.html', results=mentors)
 
 
+@app.route('/all-school')
+def get_all_school():
+    results = query.get_all_school()
+    return render_template('result.html', results=results)
+
+
 # MAIN
 ####################################################################
 def main():
