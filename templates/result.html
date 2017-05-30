@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Results</title>
-    <!-- Results: results -->
 </head>
 <body>
-    <table>
-        {% for row in results %}
+    <table border="1" style="text-align:center">
+        {% for column_name in results[0] %}
+            <th style="padding:5px 2px; background:#aaaaaa; font-weight:bold">
+                {{ column_name }} 
+            </th>
+        {% endfor %}
+        {% for row in results[1:] %}
             <tr>
                 {% for item in row %}
-                    <td> {{ item }} </td>
+                    <td style="padding:5px 2px">{{ item }}</td>
                 {% endfor %}
             </tr>
         {% endfor %}
