@@ -4,11 +4,8 @@
 
 # IMPORTS
 ####################################################################
-import psycopg2
-import display
-import utilities
+import query
 from flask import Flask, render_template
-
 app = Flask(__name__, static_url_path='/static')
 
 
@@ -18,6 +15,12 @@ app = Flask(__name__, static_url_path='/static')
 @app.route('/')
 def render_main_page():
     return render_template('index.html')
+
+
+@app.route('/mentors')
+def get_mentors():
+    mentors = query.get_mentors()
+    return render_template('result.html', results=mentors)
 
 
 # MAIN

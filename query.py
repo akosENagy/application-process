@@ -1,5 +1,32 @@
-# QUERY FUNCTIONS
-#
+import utilities
+
+
+# NEW QUERY FUNCTIONS
+####################################################################
+# OUTPUT: QUERY RESULTS AS LIST OF TUPLES. TUPLE = ROW             #
+####################################################################
+
+def get_mentors():
+    '''
+    On this page you should show the result of a query that returns the name of the mentors
+    plus the name and country of the school (joining with the schools table) ordered by the
+    mentors id column (columns: mentors.first_name, mentors.last_name, schools.name, schools.country).
+    '''
+    cursor = utilities.init_db_connection()
+    cursor.execute('''
+                   SELECT mentors.first_name, mentors.last_name, schools.name, schools.country FROM mentors
+                   JOIN schools ON (mentors.city=schools.city) ORDER BY mentors.id;
+                   ''')
+    results = cursor.fetchall()
+
+    column_names = ['First Name', 'Last Name', 'School', 'Country']
+    results.insert(0, column_names)
+
+    return results
+
+
+####################################################################
+# OLD QUERY FUNCTIONS
 ####################################################################
 # INPUT: PSYCOPG2 CONNECTION CURSOR                                #
 # OUTPUT: QUERY RESULTS AS LIST OF TUPLES. TUPLE = ROW             #
