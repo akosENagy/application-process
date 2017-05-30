@@ -41,6 +41,12 @@ def get_contacts():
     return render_template('result.html', results=contacts)
 
 
+@app.route('/applicants')
+def get_applicants():
+    applicants = query.get_applicants()
+    return render_template('result.html', results=applicants)
+
+
 # MAIN
 ####################################################################
 def main():
