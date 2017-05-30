@@ -35,6 +35,12 @@ def get_mentors_by_country():
     return render_template('result.html', results=results)
 
 
+@app.route('/contacts')
+def get_contacts():
+    contacts = query.get_contacts()
+    return render_template('result.html', results=contacts)
+
+
 # MAIN
 ####################################################################
 def main():

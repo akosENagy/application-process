@@ -50,7 +50,23 @@ def get_mentors_by_country():
         GROUP BY schools.country ORDER BY schools.country ASC;
         ''', ["Country", "Count"]
     )
+    return results
 
+
+def get_contacts():
+    '''
+    On this page you should show the result of a query that returns the
+    name of the school plus the name of contact person at the school
+    (from the mentors table) ordered by the name of the school
+    columns: schools.name, mentors.first_name, mentors.last_name
+    '''
+    results = utilities.run_select_query(
+        '''
+        SELECT schools.name, mentors.first_name, mentors.last_name FROM schools
+        JOIN mentors ON (schools.contact_person=mentors.id)
+        ORDER BY schools.name ASC;
+        ''', ["School", "First Name", "Last Name"]
+    )
     return results
 
 
